@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairos ご提案 | 古民家宿サイト トップページリニューアル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2B2A26;
+    --paper:#F5F1E8;
+    --moss:#6E8267;
+    --wood:#A9764F;
+    --bamboo:#D9CFAF;
+    --forest:#33463A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.85;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.jp-title{
+    font-family:'Shippori Antique B1', sans-serif;
+    letter-spacing:0.04em;
+  }
+  .en{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    letter-spacing:0.12em;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(217,207,175,0.10), transparent 55%),
+      radial-gradient(circle at 80% 80%, rgba(110,130,103,0.18), transparent 60%),
+      linear-gradient(160deg, #211f1b 0%, #2B2A26 45%, #3a352d 100%);
+    color:var(--paper);
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(217,207,175,0.05) 0 1px, transparent 1px 120px);
+    opacity:0.5;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:-10%;
+    bottom:-20%;
+    width:60vw;
+    height:60vw;
+    max-width:700px;
+    max-height:700px;
+    background:radial-gradient(circle, rgba(169,118,79,0.35), transparent 70%);
+    filter:blur(10px);
+  }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    padding:120px 24px 100px;
+  }
+  .badge{
+    display:inline-block;
+    padding:6px 18px;
+    border:1px solid rgba(245,241,232,0.5);
+    border-radius:999px;
+    font-size:0.75rem;
+    letter-spacing:0.2em;
+    margin-bottom:28px;
+    color:var(--bamboo);
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 5.5vw, 4rem);
+    font-weight:400;
+    line-height:1.5;
+    margin-bottom:24px;
+  }
+  .hero h1 span{
+    display:block;
+    color:var(--wood);
+  }
+  .hero p.lead{
+    max-width:520px;
+    font-size:1.02rem;
+    color:rgba(245,241,232,0.85);
+    margin-bottom:44px;
+  }
+  .scroll-cue{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-size:0.8rem;
+    color:var(--bamboo);
+    letter-spacing:0.15em;
+  }
+  .scroll-cue .line{
+    width:48px;height:1px;background:var(--bamboo);
+    position:relative;overflow:hidden;
+  }
+  .scroll-cue .line::after{
+    content:"";
+    position:absolute;left:-100%;top:0;bottom:0;width:100%;
+    background:var(--paper);
+    animation:slide 2.2s infinite;
+  }
+  @keyframes slide{
+    0%{left:-100%;} 60%{left:100%;} 100%{left:100%;}
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{
+    padding:110px 0;
+    position:relative;
+  }
+  .eyebrow{
+    font-size:0.78rem;
+    letter-spacing:0.28em;
+    color:var(--moss);
+    margin-bottom:18px;
+    text-transform:uppercase;
+  }
+  .section-title{
+    font-size:clamp(1.6rem,3.4vw,2.4rem);
+    margin-bottom:16px;
+    font-weight:400;
+  }
+  .section-lead{
+    max-width:640px;
+    color:#4b473f;
+    margin-bottom:56px;
+  }
+  .fade{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.9s ease, transform 0.9s ease;
+  }
+  .fade.show{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- UNDERSTANDING ---------- */
+  .understand{
+    background:linear-gradient(180deg, var(--paper) 0%, #efe9da 100%);
+  }
+  .u-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+  .u-card{
+    background:#fff;
+    border:1px solid rgba(43,42,38,0.08);
+    border-radius:4px;
+    padding:34px 30px;
+    position:relative;
+  }
+  .u-card::before{
+    content:attr(data-num);
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:2.4rem;
+    color:var(--bamboo);
+    position:absolute;
+    top:14px;
+    right:22px;
+  }
+  .u-card h3{
+    font-size:1.05rem;
+    margin-bottom:12px;
+    color:var(--forest);
+    font-weight:500;
+    font-family:'Zen Kaku Gothic New', sans-serif;
+  }
+  .u-card p{
+    font-size:0.92rem;
+    color:#55524a;
+  }
+  .u-note{
+    margin-top:48px;
+    padding:28px 32px;
+    border-left:3px solid var(--wood);
+    background:rgba(169,118,79,0.06);
+    font-size:0.95rem;
+    color:#3f3b34;
+  }
+
+  /* ---------- VALUE ---------- */
+  .value{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .value .eyebrow{color:var(--bamboo);}
+  .value .section-lead{color:rgba(245,241,232,0.75);}
+  .v-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:rgba(245,241,232,0.12);
+    border:1px solid rgba(245,241,232,0.12);
+  }
+  .v-card{
+    background:var(--ink);
+    padding:40px 30px;
+    transition:background 0.4s ease;
+  }
+  .v-card:hover{
+    background:#332f28;
+  }
+  .v-icon{
+    width:42px;height:42px;
+    margin-bottom:22px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--wood), var(--moss));
+  }
+  .v-card h3{
+    font-size:1.05rem;
+    margin-bottom:14px;
+    font-weight:500;
+  }
+  .v-card p{
+    font-size:0.88rem;
+    color:rgba(245,241,232,0.68);
+  }
+
+  /* ---------- SCHEDULE ---------- */
+  .schedule{
+    background:var(--paper);
+  }
+  .timeline{
+    position:relative;
+    margin-top:20px;
+    padding-left:28px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:6px;top:6px;bottom:6px;
+    width:1px;
+    background:linear-gradient(180deg, var(--wood), var(--moss));
+  }
+  .t-item{
+    position:relative;
+    padding-bottom:48px;
+  }
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:"";
+    position:absolute;
+    left:-28px;top:4px;
+    width:13px;height:13px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--wood);
+  }
+  .t-week{
+    font-size:0.78rem;
+    letter-spacing:0.15em;
+    color:var(--moss);
+    margin-bottom:6px;
+  }
+  .t-item h3{
+    font-size:1.15rem;
+    margin-bottom:8px;
+    font-weight:500;
+  }
+  .t-item p{
+    font-size:0.92rem;
+    color:#54514a;
+    max-width:560px;
+  }
+  .deadline-box{
+    margin-top:56px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--forest);
+    color:var(--paper);
+    padding:30px 36px;
+    border-radius:4px;
+  }
+  .deadline-box .d-label{font-size:0.78rem;letter-spacing:0.2em;color:var(--bamboo);margin-bottom:6px;}
+  .deadline-box .d-date{font-size:1.4rem;font-family:'Shippori Antique B1',sans-serif;}
+  .deadline-box .d-budget{text-align:right;}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    background:
+      radial-gradient(circle at 30% 20%, rgba(110,130,103,0.35), transparent 55%),
+      linear-gradient(160deg,#2B2A26, #33463A 120%);
+    color:var(--paper);
+    text-align:center;
+    padding:130px 0;
+  }
+  .closing h2{
+    font-size:clamp(1.7rem,4vw,2.6rem);
+    font-weight:400;
+    margin-bottom:22px;
+  }
+  .closing p{
+    max-width:520px;
+    margin:0 auto 44px;
+    color:rgba(245,241,232,0.8);
+  }
+  .cta-btn{
+    display:inline-block;
+    padding:18px 52px;
+    border:1px solid var(--bamboo);
+    border-radius:999px;
+    font-size:0.95rem;
+    letter-spacing:0.1em;
+    position:relative;
+    overflow:hidden;
+    transition:color 0.4s ease;
+  }
+  .cta-btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:var(--paper);
+    transform:translateX(-101%);
+    transition:transform 0.45s ease;
+    z-index:-1;
+  }
+  .cta-btn:hover{color:var(--ink);}
+  .cta-btn:hover::before{transform:translateX(0);}
+
+  footer{
+    background:var(--ink);
+    color:rgba(245,241,232,0.5);
+    text-align:center;
+    padding:26px 0;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+  }
+
+  @media(max-width:820px){
+    .u-grid{grid-template-columns:1fr;}
+    .v-grid{grid-template-columns:1fr;}
+    .deadline-box{flex-direction:column;align-items:flex-start;}
+    .deadline-box .d-budget{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <span class="badge en">Proposal from Kairos</span>
+    <h1>明治の梁は、まだ物語の途中。<span>その続きを、モダンな言葉と動きで。</span></h1>
+    <p class="lead">古民家宿サイトのトップページリニューアルにあたり、私たちKairosより企画・デザイン・実装までを一貫してご提案いたします。自然、文化財としての佇まい、そして部屋ごとの個性――貴宿にしかない魅力を、静止画の説明文ではなく「体験の予感」として届けるサイトを目指します。</p>
+    <div class="scroll-cue"><div class="line"></div>SCROLL</div>
+  </div>
+</section>
+
+<section class="understand">
+  <div class="wrap">
+    <div class="eyebrow fade">Understanding / 案件の理解</div>
+    <h2 class="section-title fade">現行サイトを拝見して、私たちが感じたこと</h2>
+    <p class="section-lead fade">yado-iida.com を拝見し、明治20年代の建物という稀少な資産、母屋・サウナ・コテージという多層的な滞在体験、板長料理、そして個性豊かな客室――情報としては揃っているものの、その「熱量」がまだトップページの見た目に十分反映されていないと感じました。</p>
+    <div class="u-grid">
+      <div class="u-card fade" data-num="01">
+        <h3>自然という一番の推しが、埋もれている</h3>
+        <p>写真の羅列ではなく、映像的な余白と動きで「風・光・音」を感じさせる導線に再設計します。</p>
+      </div>
+      <div class="u-card fade" data-num="02">
+        <h3>文化財としての希少性が伝わりにくい</h3>
+        <p>明治20年代の建物に泊まれるという事実そのものを、ヒーロー直下でストーリーとして提示します。</p>
+      </div>
+      <div class="u-card fade" data-num="03">
+        <h3>部屋・施設ごとの個性が並列で埋もれる</h3>
+        <p>母屋・サウナ・コテージ・客室を一覧化し「詳しくはこちら」で深掘りできる回遊設計に。</p>
+      </div>
+      <div class="u-card fade" data-num="04">
+        <h3>和風すぎず、しかし品位は保ちたい</h3>
+        <p>参考いただいた100raku.comの余白設計・タイポグラフィ感を軸に、モダンでシンプルな骨格を組みます。</p>
+      </div>
+    </div>
+    <div class="u-note fade">板長料理・SNS/YouTubeでの掲載実績・不要になるプラン表記の整理についても、情報設計の段階で優先順位を再構築し、伝わる順番でコンテンツを配置いたします。</div>
+  </div>
+</section>
+
+<section class="value">
+  <div class="wrap">
+    <div class="eyebrow fade">Value / Kairosが提供できること</div>
+    <h2 class="section-title fade">デザインだけで終わらせない、実装まで責任を持つ体制</h2>
+    <p class="section-lead fade">静的HTML/CSS/JavaScriptでの一式納品というご要望に対し、Kairosはデザイン・コーディング・ライティングを分業させず、一気通貫で対応することでイメージのズレと手戻りを最小限にします。</p>
+    <div class="v-grid">
+      <div class="v-card fade">
+        <div class="v-icon"></div>
+        <h3>モダン×古民家のデザイン言語</h3>
+        <p>参考サイトの余白・グリッド感を踏まえつつ、明治の建物が持つ質感をタイポグラフィと色面で表現します。</p>
+      </div>
+      <div class="v-card fade">
+        <div class="v-icon"></div>
+        <h3>フェードイン等のUIアニメーション実装</h3>
+        <p>スクロール連動のフェードイン、部屋一覧のホバー演出などをJavaScriptで軽量に実装します。</p>
+      </div>
+      <div class="v-card fade">
+        <div class="v-icon"></div>
+        <h3>環境非依存の納品構成</h3>
+        <p>CMS非依存・特定サーバー非依存を前提に、フォルダ一式のみで別環境でも再現できる構成で制作します。</p>
+      </div>
+      <div class="v-card fade">
+        <div class="v-icon"></div>
+        <h3>キャッチコピーを含むライティング</h3>
+        <p>自然・文化財体験・料理・SNS実績を、読ませる順番と言葉選びごと設計します。</p>
+      </div>
+      <div class="v-card fade">
+        <div class="v-icon"></div>
+        <h3>下層ページ展開を見据えた設計</h3>
+        <p>今後の下層ページ制作依頼を想定し、コンポーネント単位で再利用しやすいコーディングにします。</p>
+      </div>
+      <div class="v-card fade">
+        <div class="v-icon"></div>
+        <h3>宿泊施設サイトの実装経験</h3>
+        <p>写真・映像を活かすレイアウトと、スマートフォンでの体験優先設計を得意としています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="schedule">
+  <div class="wrap">
+    <div class="eyebrow fade">Schedule / 進め方</div>
+    <h2 class="section-title fade">10月10日の納品に向けたスケジュールイメージ</h2>
+    <p class="section-lead fade">現行サイトと参考サイトの情報を初回ヒアリングで整理し、以降は「構成→コピー→デザイン→実装」の順で確認を挟みながら進行します。</p>
+
+    <div class="timeline">
+      <div class="t-item fade">
+        <div class="t-week">Week 1</div>
+        <h3>ヒアリング・素材整理・構成設計</h3>
+        <p>現行サイトと参考サイトの読み解き、優先順位の合意、ワイヤーフレーム作成を行います。</p>
+      </div>
+      <div class="t-item fade">
+        <div class="t-week">Week 2</div>
+        <h3>コピーライティング＆デザインカンプ</h3>
+        <p>キャッチコピー案とPC・スマートフォンのデザインを合わせてご提示し、方向性をすり合わせます。</p>
+      </div>
+      <div class="t-item fade">
+        <div class="t-week">Week 3</div>
+        <h3>コーディング・アニメーション実装</h3>
+        <p>HTML/CSS/JavaScriptによるレスポンシブ実装、フェードイン等の動きを組み込みます。</p>
+      </div>
+      <div class="t-item fade">
+        <div class="t-week">Week 4</div>
+        <h3>テスト環境での確認・修正・納品</h3>
+        <p>ご依頼者様のテスト環境で表示確認いただき、調整のうえファイル一式を納品いたします。</p>
+      </div>
+    </div>
+
+    <div class="deadline-box fade">
+      <div>
+        <div class="d-label">DELIVERY DEADLINE</div>
+        <div class="d-date">10月10日（土）納品</div>
+      </div>
+      <div class="d-budget">
+        <div class="d-label">お見積り目安</div>
+        <div class="d-date">¥55,000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <div class="eyebrow fade">Next Action</div>
+    <h2 class="fade">この古民家が持つ物語を、<br>次の百年へ伝える一枚に。</h2>
+    <p class="fade">自己紹介・実績・お見積り詳細を含めたご提案の続きを、ぜひお話しさせてください。宿泊施設・古民家案件のご相談、心よりお待ちしております。</p>
+    <a href="#" class="cta-btn fade">Kairosに相談してみる</a>
+  </div>
+</section>
+
+<footer>© Kairos — Web制作・システム開発チーム</footer>
+
+<script>
+  const items = document.querySelectorAll('.fade');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('show');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  items.forEach(i=>io.observe(i));
+</script>
+
+</body>
+</html>
